@@ -1,0 +1,21 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TarkovSharp", "TarkovSharp\TarkovSharp.csproj", "{99F4AA45-59F8-457D-9975-5D4308D51F10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TarkovSharp Test", "TarkovSharp Test\TarkovSharp Test.csproj", "{C46CCBCE-6A05-4661-B003-472B94983CDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99F4AA45-59F8-457D-9975-5D4308D51F10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F4AA45-59F8-457D-9975-5D4308D51F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F4AA45-59F8-457D-9975-5D4308D51F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F4AA45-59F8-457D-9975-5D4308D51F10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C46CCBCE-6A05-4661-B003-472B94983CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C46CCBCE-6A05-4661-B003-472B94983CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C46CCBCE-6A05-4661-B003-472B94983CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C46CCBCE-6A05-4661-B003-472B94983CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
