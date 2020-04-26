@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using TarkovSharp;
+using TarkovSharp.API.Enums;
 using TarkovSharp.Http;
 
 namespace TarkovSharp.Test
@@ -9,14 +10,12 @@ namespace TarkovSharp.Test
     {
         static async Task Main(string[] args)
         {
-            using TarkovMarketWrapper market = new TarkovMarketWrapper("YoureNotGettingMyAPIKey", Language.En);
-            
-            var allItems = await market.GetAllItems(Language.Cn);
+            var tarkovApiKey = Environment.GetEnvironmentVariable("TARKOV_API_KEY");
+            var tarkovClient = new TarkovMarketClient(tarkovApiKey);
 
-            foreach (AllItems.Item item in allItems.item)
-            {
-                Console.WriteLine(item.Name);
-            }
+            var x = await tarkovClient.GetTarkovItemByNameAsync("btc");
+
+            Console.WriteLine(x.Uid);
         }
     }
 }

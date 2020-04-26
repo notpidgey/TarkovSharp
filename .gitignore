@@ -302,3 +302,4 @@ src/sales-customer-checker.UnitTests/coverage.*
 keyRing/
 
 *.csv
+/TarkovSharp.Test/Properties/launchSettings.json
