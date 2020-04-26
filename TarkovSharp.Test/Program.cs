@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 using TarkovSharp;
 using TarkovSharp.Http;
 
-namespace Tarkov_Market_Test
+namespace TarkovSharp.Test
 {
     class Program
     {
         static async Task Main(string[] args)
         {
-            TarkovMarketWrapper market = new TarkovMarketWrapper("YoureNotGettingMyAPIKey", Language.En);
-
+            using TarkovMarketWrapper market = new TarkovMarketWrapper("YoureNotGettingMyAPIKey", Language.En);
+            
             var allItems = await market.GetAllItems(Language.Cn);
 
             foreach (AllItems.Item item in allItems.item)

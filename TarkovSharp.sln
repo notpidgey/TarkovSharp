@@ -1,7 +1,7 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TarkovSharp", "TarkovSharp\TarkovSharp.csproj", "{99F4AA45-59F8-457D-9975-5D4308D51F10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TarkovSharp Test", "TarkovSharp Test\TarkovSharp Test.csproj", "{C46CCBCE-6A05-4661-B003-472B94983CDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TarkovSharp.Test", "TarkovSharp.Test\TarkovSharp.Test.csproj", "{C46CCBCE-6A05-4661-B003-472B94983CDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
