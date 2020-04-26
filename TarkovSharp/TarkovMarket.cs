@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using TarkovSharp.Http;
 using TarkovSharp.Interfaces;
 
 namespace TarkovSharp
 {
-    public class TarkovMarketWrapper : IDisposable , ITarkovMarket
+    public class TarkovMarketWrapper : IDisposable
     {
         private Language _lang { get; set; }
         private string _apiKey { get; set; }
