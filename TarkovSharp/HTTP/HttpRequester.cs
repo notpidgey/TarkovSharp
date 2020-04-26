@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -16,9 +17,9 @@ namespace TarkovSharp.Http
             _client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
         }
 
-        public async Task<ItemInfo> RequestAsyncIN(Uri baseAddress)
+        public async Task<List<Item>> RequestAsyncIN(Uri baseAddress)
         {
-            ItemInfo result;
+            List<Item> result;
             
             using (var response = await _client.GetAsync(baseAddress).ConfigureAwait(false))
             {
@@ -27,14 +28,14 @@ namespace TarkovSharp.Http
                     throw new TarkovSharpException("Could not retrieve data.");
                 }
                 var responseData = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result = JsonConvert.DeserializeObject<ItemInfo>(responseData);
+                result = JsonConvert.DeserializeObject<List<Item>>(responseData, Converter.Settings);
             }
             return result;
         }
         
-        public async Task<AllItems> RequestAsyncAI(Language language)
+        public async Task<List<Item>> RequestAsyncAI(Language language)
         {
-            AllItems result;
+            List<Item> result;
             Uri baseAddress = new Uri("https://tarkov-market.com/api/v1/items/all");
 
             using (var response = await _client.GetAsync(baseAddress).ConfigureAwait(false))
@@ -44,7 +45,7 @@ namespace TarkovSharp.Http
                     throw new TarkovSharpException("Could not retrieve data.");
                 }
                 var responseData = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result = JsonConvert.DeserializeObject<AllItems>(responseData);
+                result = JsonConvert.DeserializeObject<List<Item>>(responseData, Converter.Settings);
             }
             return result;
         }

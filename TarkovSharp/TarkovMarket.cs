@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TarkovSharp.Http;
 
@@ -20,27 +21,27 @@ namespace TarkovSharp
             _httpRequester = new HttpRequester(apiKey);
         }
         
-        public async Task<ItemInfo> FindItemByName(string itemName, Language language = Language.None)
+        public async Task<List<Item>> FindItemByName(string itemName, Language language = Language.None)
         {
             if (language == Language.None)
                 language = _lang;
             
-            var baseAddress = new Uri("https://tarkov-market.com/api/v1/item?q=" + itemName.Replace(" ", "_") + "?lang=" + language.ToString().ToLower());
+            var baseAddress = new Uri("https://tarkov-market.com/api/v1/item?q=" + itemName.Replace(" ", "_") + "&lang=" + language.ToString().ToLower());
             
             return await _httpRequester.RequestAsyncIN(baseAddress);
         }
         
-        public async Task<ItemInfo> FindItemByUid(string uid, Language language = Language.None)
+        public async Task<List<Item>> FindItemByUid(string uid, Language language = Language.None)
         {
             if (language == Language.None)
                 language = _lang;
             
-            var baseAddress = new Uri("https://tarkov-market.com/api/v1/item?uid=" + uid + "?lang=" + language.ToString().ToLower());
+            var baseAddress = new Uri("https://tarkov-market.com/api/v1/item?uid=" + uid + "&lang=" + language.ToString().ToLower());
             
             return await _httpRequester.RequestAsyncIN(baseAddress);
         }
         
-        public async Task<AllItems> GetAllItems(Language language = Language.None)
+        public async Task<List<Item>> GetAllItems(Language language = Language.None)
         {
             if (language == Language.None)
                 language = _lang;
