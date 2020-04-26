@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using TarkovSharp.Http;
-using TarkovSharp.Interfaces;
 
 namespace TarkovSharp
 {
