@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace TarkovSharp.Http
 {
-    public class HttpRequester
+    public class HttpRequester : IDisposable
     {
         private readonly HttpClient _client;
         
@@ -47,6 +47,11 @@ namespace TarkovSharp.Http
                 result = JsonConvert.DeserializeObject<AllItems>(responseData);
             }
             return result;
+        }
+
+        public void Dispose()
+        {
+            _client?.Dispose();
         }
     }
 }

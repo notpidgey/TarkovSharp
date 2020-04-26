@@ -53,7 +53,7 @@ namespace TarkovSharp
 
         public void Dispose()
         {
-            
+            _httpRequester.Dispose();
         }
     }
 }
