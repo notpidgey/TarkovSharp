@@ -9,14 +9,10 @@ namespace TarkovSharp.Test
     {
         static async Task Main(string[] args)
         {
-            using TarkovMarketWrapper market = new TarkovMarketWrapper("your_api_key", Language.En);
-
-            //Gets information about bTC
-            var item = await market.FindItemByName("btc");
-            Console.WriteLine(item[0].Name);
-
+            using TarkovMarketClient market = new TarkovMarketClient("your_api_key");
+            
             //Gets all items
-            var allItems = await market.GetAllItems();
+            var allItems = await market.GetAllTarkovItem();
             foreach (Item t in allItems)
             {
                 Console.WriteLine(t.Name + ": " +  t.BsgId);

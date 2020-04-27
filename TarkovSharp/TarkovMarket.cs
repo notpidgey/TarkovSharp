@@ -1,57 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using TarkovSharp.Http;
+using TarkovSharp.Utils;
 
 namespace TarkovSharp
 {
-    public class TarkovMarketWrapper : IDisposable
+    public class TarkovMarketClient : IDisposable
     {
-        private readonly Language _lang;
-        private readonly HttpRequester _httpRequester;
+        private readonly HttpClientService _httpClientService;
 
-        public TarkovMarketWrapper(string apiKey, Language lang)
+        private readonly TarkovLanguage _lang;
+
+        public TarkovMarketClient(string apiKey, TarkovLanguage lang = TarkovLanguage.EN)
         {
-            if (string.IsNullOrEmpty(apiKey))
-            {
-                throw new ArgumentException("API key cannot be empty.");
-            }
             _lang = lang;
+            _lang.EnsureValidLanguage();
 
-            _httpRequester = new HttpRequester(apiKey);
-        }
-        
-        public async Task<List<Item>> FindItemByName(string itemName, Language language = Language.None)
-        {
-            if (language == Language.None)
-                language = _lang;
-            
-            var baseAddress = new Uri("https://tarkov-market.com/api/v1/item?q=" + itemName.Replace(" ", "_") + "&lang=" + language.ToString().ToLower());
-            
-            return await _httpRequester.RequestAsyncIN(baseAddress);
-        }
-        
-        public async Task<List<Item>> FindItemByUid(string uid, Language language = Language.None)
-        {
-            if (language == Language.None)
-                language = _lang;
-            
-            var baseAddress = new Uri("https://tarkov-market.com/api/v1/item?uid=" + uid + "&lang=" + language.ToString().ToLower());
-            
-            return await _httpRequester.RequestAsyncIN(baseAddress);
-        }
-        
-        public async Task<List<Item>> GetAllItems(Language language = Language.None)
-        {
-            if (language == Language.None)
-                language = _lang;
-            
-            return await _httpRequester.RequestAsyncAI(language);
+            _httpClientService = HttpClientService.CreateService(apiKey);
         }
 
-        public void Dispose()
+        public async Task<Item> GetTarkovItemByNameAsync(string name, TarkovLanguage lang = TarkovLanguage.None)
         {
-            _httpRequester.Dispose();
+            if (lang == TarkovLanguage.None)
+                lang = _lang;
+            
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("No item name specified.", nameof(name));
+            }
+
+            var result = await _httpClientService.RequestAsync($"item?q={HttpUtility.UrlEncode(name)}&lang={lang}");
+
+            return result.FirstOrDefault();
         }
+
+        public async Task<List<Item>> GetAllTarkovItem(TarkovLanguage lang = TarkovLanguage.None)
+        {
+            if (lang == TarkovLanguage.None)
+                lang = _lang;
+            
+            var result = await _httpClientService.RequestAsync($"items/all?lang={lang}");
+
+            return result;
+        }
+
+        public void Dispose() => _httpClientService.Dispose();
     }
 }
